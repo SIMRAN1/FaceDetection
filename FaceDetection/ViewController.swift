@@ -15,23 +15,35 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var messageLabel: UILabel!
+      let imageView = UIImageView(image: UIImage(named: "face")!)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator.hidesWhenStopped = true
-        setupImageView()
-    }
-    func setupImageView() {
-        guard let image = UIImage(named: "faces") else {
+       guard let image = UIImage(named: "faces") else {
             return
         }
+ 
+        
+        
+        setupImageView(for: image)
+    }
+    
+    
+    func setupImageView(for image:UIImage) {
+       
         guard let cgImage = image.cgImage else {
             return
         }
-        let imagView = UIImageView(image: image)
-        imagView.contentMode = .scaleAspectFit
+       
+        imageView.image = nil
+        imageView.image = image
+        imageView.contentMode = .scaleAspectFit
         let scaledHeight = (view.frame.width/image.size.width)*image.size.height
-        imagView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: scaledHeight)
-        view.addSubview(imagView)
+        imageView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: scaledHeight)
+        view.addSubview(imageView)
+        self.activityIndicator.alpha = 1.0
+        self.messageLabel.alpha = 1.0
         activityIndicator.startAnimating()
         DispatchQueue.global(qos: .background).async {
             self.performVisionRequest(for: cgImage, with: scaledHeight)
@@ -73,6 +85,7 @@ class ViewController: UIViewController {
     }
     
     func createfaceOutline(for rectangle: CGRect) {
+        
         let yellowView = UIView()
         yellowView.backgroundColor = .clear
         yellowView.layer.borderColor = UIColor.yellow.cgColor
@@ -88,6 +101,47 @@ class ViewController: UIViewController {
         }
         self.activityIndicator.stopAnimating()
     }
+    
+    
+    @IBAction func cameraButtonPressed(_ sender: Any) {
+        guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
+            presentPhotoPicker(sourceType: .photoLibrary)
+            return
+        }
+        
+        let photoSourcePicker = UIAlertController()
+        let takePhotoAction = UIAlertAction(title: "Take Photo", style: .default) { _ in
+            self.presentPhotoPicker(sourceType: .camera)
+        }
+        
+        let choosePhotoAction = UIAlertAction(title: "Choose Photo", style: .default) { _ in
+            self.presentPhotoPicker(sourceType: .photoLibrary)
+        }
+        photoSourcePicker.addAction(takePhotoAction)
+        photoSourcePicker.addAction(choosePhotoAction)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        photoSourcePicker.addAction(cancelAction)
+        present(photoSourcePicker, animated: true, completion: nil)
+    }
+    
+    func presentPhotoPicker(sourceType : UIImagePickerController.SourceType) {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.sourceType = sourceType
+        present(picker, animated: true, completion: nil)
+    }
 
+    }
+    
+
+extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true, completion: nil)
+        guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
+            fatalError("No Image Returned")
+        }
+        setupImageView(for: image)
+    }
 }
+
 

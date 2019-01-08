@@ -18,23 +18,38 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="MBe-ST-Gst">
-                                <rect key="frame" x="177" y="627" width="21" height="20"/>
-                            </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Finding Faces..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ml-no-PBZ">
-                                <rect key="frame" x="127" y="592" width="121" height="20"/>
+                                <rect key="frame" x="127" y="542" width="121" height="20"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="76G-jr-maw">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <items>
+                                    <barButtonItem title="Item" image="camera" id="hBQ-Fg-Lx8">
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <action selector="cameraButtonPressed:" destination="BYZ-38-t0r" id="xvn-M0-sN1"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="MBe-ST-Gst">
+                                <rect key="frame" x="177" y="578" width="21" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="MBe-ST-Gst" firstAttribute="centerX" secondItem="6ml-no-PBZ" secondAttribute="centerX" id="9y2-KZ-NTr"/>
-                            <constraint firstAttribute="bottom" secondItem="MBe-ST-Gst" secondAttribute="bottom" constant="20" symbolic="YES" id="EVN-Rl-oQa"/>
-                            <constraint firstItem="MBe-ST-Gst" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="177" id="LgK-t1-w2E"/>
-                            <constraint firstItem="6ml-no-PBZ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Mdb-zJ-O9t"/>
-                            <constraint firstItem="6ml-no-PBZ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="572" id="Y85-ld-LHP"/>
+                            <constraint firstAttribute="trailing" secondItem="76G-jr-maw" secondAttribute="trailing" id="CyI-oq-LRw"/>
+                            <constraint firstItem="76G-jr-maw" firstAttribute="top" secondItem="MBe-ST-Gst" secondAttribute="bottom" constant="25" id="aYs-gu-HJ4"/>
+                            <constraint firstItem="76G-jr-maw" firstAttribute="centerX" secondItem="MBe-ST-Gst" secondAttribute="centerX" id="fnh-B4-Uyx"/>
+                            <constraint firstItem="6ml-no-PBZ" firstAttribute="centerX" secondItem="MBe-ST-Gst" secondAttribute="centerX" id="lra-df-2kA"/>
+                            <constraint firstItem="76G-jr-maw" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="tXE-u2-LF6"/>
+                            <constraint firstItem="MBe-ST-Gst" firstAttribute="top" secondItem="6ml-no-PBZ" secondAttribute="bottom" constant="16" id="uDe-Cr-Zog"/>
+                            <constraint firstItem="76G-jr-maw" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="utE-bi-AWt"/>
+                            <constraint firstItem="6ml-no-PBZ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="522" id="wnu-0P-QHS"/>
+                            <constraint firstItem="MBe-ST-Gst" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="177" id="wpa-wm-4NC"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -48,4 +63,7 @@
             <point key="canvasLocation" x="136.80000000000001" y="133.5832083958021"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="camera" width="375" height="375"/>
+    </resources>
 </document>
