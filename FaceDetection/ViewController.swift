@@ -33,7 +33,10 @@ class ViewController: UIViewController {
         imagView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: scaledHeight)
         view.addSubview(imagView)
         activityIndicator.startAnimating()
-        performVisionRequest(for: cgImage)
+        DispatchQueue.global(qos: .background).async {
+            self.performVisionRequest(for: cgImage)
+        }
+        
     }
 
     func performVisionRequest(for image: CGImage) {
@@ -46,8 +49,12 @@ class ViewController: UIViewController {
                 guard let faceObservation = result as? VNFaceObservation else {
                     return
                 }
-                let faceRectangle = CGRect(x: 0, y: 0, width: 100, height: 100)
-                createfaceOutline(for: faceRectangle )
+                
+                DispatchQueue.main.async {
+                    let faceRectangle = CGRect(x: 0, y: 0, width: 100, height: 100)
+                    self.createfaceOutline(for: faceRectangle )
+                }
+               
                 
             })
             
