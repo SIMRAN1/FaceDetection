@@ -21,7 +21,7 @@ class ViewController: UIViewController {
         setupImageView()
     }
     func setupImageView() {
-        guard let image = UIImage(named: "face") else {
+        guard let image = UIImage(named: "faces") else {
             return
         }
         guard let cgImage = image.cgImage else {
