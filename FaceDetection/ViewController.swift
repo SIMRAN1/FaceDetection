@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Vision
 
 class ViewController: UIViewController {
 
@@ -16,8 +17,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var messageLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        activityIndicator.startAnimating()
+        activityIndicator.hidesWhenStopped = true
         setupImageView()
     }
     func setupImageView() {
@@ -28,11 +28,24 @@ class ViewController: UIViewController {
         imagView.contentMode = .scaleAspectFit
         let scaledHeight = (view.frame.width/image.size.width)*image.size.height
         imagView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: scaledHeight)
-        imagView.layer.borderColor = UIColor.white.cgColor
-        imagView.layer.borderWidth = 2
         view.addSubview(imagView)
     }
 
+    func performVisionRequest() {
+        let faceDetectionRequest = VNDetectFaceRectanglesRequest { (request, error) in
+            if let error = error {
+                print("Failed to detect Face")
+                return
+            }
+            request.results?.forEach({ (result) in
+                guard let faceObservation = result as? VNFaceObservation else {
+                    return
+                }
+                print(faceObservation.boundingBox)
+            })
+            
+        }
+    }
 
 }
 
