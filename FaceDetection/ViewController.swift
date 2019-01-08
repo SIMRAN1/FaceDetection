@@ -24,17 +24,22 @@ class ViewController: UIViewController {
         guard let image = UIImage(named: "face") else {
             return
         }
+        guard let cgImage = image.cgImage else {
+            return
+        }
         let imagView = UIImageView(image: image)
         imagView.contentMode = .scaleAspectFit
         let scaledHeight = (view.frame.width/image.size.width)*image.size.height
         imagView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: scaledHeight)
         view.addSubview(imagView)
+        activityIndicator.startAnimating()
+        performVisionRequest(for: cgImage)
     }
 
-    func performVisionRequest() {
+    func performVisionRequest(for image: CGImage) {
         let faceDetectionRequest = VNDetectFaceRectanglesRequest { (request, error) in
             if let error = error {
-                print("Failed to detect Face")
+                print("Failed to detect Face",error)
                 return
             }
             request.results?.forEach({ (result) in
@@ -44,6 +49,13 @@ class ViewController: UIViewController {
                 print(faceObservation.boundingBox)
             })
             
+        }
+        let imageRequestHandler = VNImageRequestHandler(cgImage: image, options: [:])
+        do {
+            try imageRequestHandler.perform([faceDetectionRequest])
+        } catch {
+        print("Failed to detect Face")
+          return
         }
     }
 
