@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Finding Faces..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ml-no-PBZ">
-                                <rect key="frame" x="126.5" y="542" width="121" height="20"/>
+                                <rect key="frame" x="127" y="542" width="121" height="20"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -44,12 +44,11 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="6ml-no-PBZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="126.5" id="1Ao-gc-Cdn"/>
                             <constraint firstItem="76G-jr-maw" firstAttribute="top" secondItem="MBe-ST-Gst" secondAttribute="bottom" constant="25" id="MeP-67-nw8"/>
                             <constraint firstItem="76G-jr-maw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="TJC-b3-UAH"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="6ml-no-PBZ" secondAttribute="trailing" constant="127.5" id="Y46-5a-xQG"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="MBe-ST-Gst" secondAttribute="trailing" constant="178" id="cHZ-gD-ljd"/>
                             <constraint firstItem="76G-jr-maw" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="fYG-th-NqY"/>
+                            <constraint firstItem="6ml-no-PBZ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="inb-iU-O8k"/>
                             <constraint firstItem="MBe-ST-Gst" firstAttribute="top" secondItem="6ml-no-PBZ" secondAttribute="bottom" constant="16" id="vJ4-k7-rjB"/>
                             <constraint firstItem="MBe-ST-Gst" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="177" id="xYN-eV-186"/>
                             <constraint firstItem="76G-jr-maw" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="zkK-QX-HfT"/>

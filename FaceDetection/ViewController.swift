@@ -16,11 +16,12 @@ class ViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var messageLabel: UILabel!
       let imageView = UIImageView(image: UIImage(named: "face")!)
+       var yellowView = UIView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator.hidesWhenStopped = true
-       guard let image = UIImage(named: "faces") else {
+       guard let image = UIImage(named: "face") else {
             return
         }
  
@@ -31,7 +32,7 @@ class ViewController: UIViewController {
     
     
     func setupImageView(for image:UIImage) {
-       
+    
         guard let cgImage = image.cgImage else {
             return
         }
@@ -86,7 +87,7 @@ class ViewController: UIViewController {
     
     func createfaceOutline(for rectangle: CGRect) {
         
-        let yellowView = UIView()
+      
         yellowView.backgroundColor = .clear
         yellowView.layer.borderColor = UIColor.yellow.cgColor
         yellowView.layer.borderWidth = 3
@@ -95,11 +96,16 @@ class ViewController: UIViewController {
         yellowView.frame = rectangle
         self.view.addSubview(yellowView)
         UIView.animate(withDuration: 0.3) {
-            yellowView.alpha = 0.75
+            self.yellowView.alpha = 0.75
             self.activityIndicator.alpha = 0.0
             self.messageLabel.alpha = 0.0
         }
         self.activityIndicator.stopAnimating()
+    }
+    
+    func removefaceOutline() {
+         self.yellowView.alpha = 0
+      
     }
     
     
@@ -140,6 +146,7 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
         guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
             fatalError("No Image Returned")
         }
+        removefaceOutline()
         setupImageView(for: image)
     }
 }
